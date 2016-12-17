@@ -1,4 +1,5 @@
-﻿using System;
+﻿using odeToFood.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,9 +16,14 @@ namespace odeToFood.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            //   ViewBag.Message = "Your application description page.";
+            // ViewBag.Location = "Atlanta, USA";
 
-            return View();
+            var model = new AboutModel();
+            model.Message = "test";
+            model.Location = "USA";
+
+            return View(model);
         }
 
         public ActionResult Contact()

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using odeToFood;
 using odeToFood.Controllers;
+using odeToFood.Models;
 
 namespace odeToFood.Tests.Controllers
 {
@@ -31,11 +32,18 @@ namespace odeToFood.Tests.Controllers
             // Arrange
             HomeController controller = new HomeController();
 
+            //AboutModel model = new AboutModel();
+            //model.Message = "test";
+            //model.Location = "USA";
+
             // Act
             ViewResult result = controller.About() as ViewResult;
+           
 
             // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
+           // Assert.AreEqual("About", result.ViewBag.Title);
+            Assert.IsNotNull(result.Model);
+           // Assert.AreEqual("test", result.Model);
         }
 
         [TestMethod]
