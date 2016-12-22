@@ -11,6 +11,16 @@ namespace odeToFood.Controllers
     {
         public ActionResult Index()
         {
+
+
+            var controller = RouteData.Values["controller"];
+            var action = RouteData.Values["Action"];
+            var id = RouteData.Values["id"];
+
+            String value = String.Format("{0}::{1} {2}", controller, action, id);
+
+            ViewBag.Message = value;
+
             return View();
         }
 
@@ -18,6 +28,8 @@ namespace odeToFood.Controllers
         {
             //   ViewBag.Message = "Your application description page.";
             // ViewBag.Location = "Atlanta, USA";
+
+
 
             var model = new AboutModel();
             model.Message = "test";

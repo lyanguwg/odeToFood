@@ -1,0 +1,27 @@
+﻿@model IEnumerable<odeToFood.Models.Review>
+
+@{
+    ViewBag.Title = "Index";
+
+    var firstreview = Model.First();
+}
+
+@*@firstreview.Name*@
+
+<h2>List of Reviews</h2>
+
+@section featured {
+    This is the latest @Model.Count() number of reviews.
+    }
+
+
+@foreach (var item in Model)
+{
+    @*@:Review*@
+
+    @Html.Partial("_Review", item);
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
