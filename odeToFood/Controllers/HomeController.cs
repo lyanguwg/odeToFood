@@ -23,7 +23,30 @@ namespace odeToFood.Controllers
 
             //ViewBag.Message = value;
 
-            var model = _db.Restarants.ToList<Restaurant>();
+            // var model = _db.Restarants.ToList<Restaurant>();
+
+            //linq comprehensive syntax
+            //var model = from r in _db.Restarants
+            //            orderby r.Reviews.Average(review => review.Rating) descending
+            //            select new RestaurantListViewModel
+            //            {
+            //                Id = r.id,
+            //                Name = r.Name,
+            //                City = r.City,
+            //                Country = r.Country,
+            //                CountOfReviews = r.Reviews.Count()
+            //            };
+
+            var model = _db.Restarants.OrderByDescending(r =>r.Reviews.Average(review => review.Rating))
+                        .Select(r => new RestaurantListViewModel
+                        {
+                            Id = r.id,
+                            Name = r.Name,
+                            City = r.City,
+                            Country = r.Country,
+                            CountOfReviews = r.Reviews.Count()
+                        });
+
             return View(model);
         }
 
