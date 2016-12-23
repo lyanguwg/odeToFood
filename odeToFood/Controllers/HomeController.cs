@@ -9,19 +9,22 @@ namespace odeToFood.Controllers
 {
     public class HomeController : Controller
     {
+        OdetoFoodDb _db = new OdetoFoodDb();
+
         public ActionResult Index()
         {
 
 
-            var controller = RouteData.Values["controller"];
-            var action = RouteData.Values["Action"];
-            var id = RouteData.Values["id"];
+            //var controller = RouteData.Values["controller"];
+            //var action = RouteData.Values["Action"];
+            //var id = RouteData.Values["id"];
 
-            String value = String.Format("{0}::{1} {2}", controller, action, id);
+            //String value = String.Format("{0}::{1} {2}", controller, action, id);
 
-            ViewBag.Message = value;
+            //ViewBag.Message = value;
 
-            return View();
+            var model = _db.Restarants.ToList<Restaurant>();
+            return View(model);
         }
 
         public ActionResult About()
@@ -43,6 +46,15 @@ namespace odeToFood.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if(_db != null)
+            {
+                _db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

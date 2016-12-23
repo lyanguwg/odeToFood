@@ -8,12 +8,14 @@ namespace odeToFood.Models
     public class Review
     {
         public int Id { get; set; }
-        public String Name { get; set; }
-
-        public String City { get; set; }
-
-        public String Country { get; set; }
+      
 
         public int Rating { get; set; }
+
+        public string Body { get; set; }
+
+        public int RestaurantId { get; set; }
+
+        public string ReviewerName { get; set; }
     }
 }
