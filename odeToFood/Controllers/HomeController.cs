@@ -11,7 +11,7 @@ namespace odeToFood.Controllers
     {
         OdetoFoodDb _db = new OdetoFoodDb();
 
-        public ActionResult Index()
+        public ActionResult Index(string searchTerm = null)
         {
 
 
@@ -38,14 +38,15 @@ namespace odeToFood.Controllers
             //            };
 
             var model = _db.Restarants.OrderByDescending(r =>r.Reviews.Average(review => review.Rating))
-                        .Select(r => new RestaurantListViewModel
-                        {
-                            Id = r.id,
-                            Name = r.Name,
-                            City = r.City,
-                            Country = r.Country,
-                            CountOfReviews = r.Reviews.Count()
-                        });
+                            .Where( r => searchTerm == null || r.Name.StartsWith(searchTerm))
+                            .Select(r => new RestaurantListViewModel
+                            {
+                                Id = r.id,
+                                Name = r.Name,
+                                City = r.City,
+                                Country = r.Country,
+                                CountOfReviews = r.Reviews.Count()
+                            });
 
             return View(model);
         }
