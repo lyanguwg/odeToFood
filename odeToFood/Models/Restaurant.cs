@@ -8,7 +8,7 @@ namespace odeToFood.Models
     public class Restaurant
     {
 
-        public int id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
@@ -16,6 +16,7 @@ namespace odeToFood.Models
 
         public string Country { get; set; }
 
-        public ICollection<Review> Reviews { get; set; }
+        //adding virtual mades EF perform implicit loading when Reviews are needed
+        public virtual ICollection<Review> Reviews { get; set; }
     }
 }

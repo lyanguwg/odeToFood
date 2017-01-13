@@ -8,7 +8,7 @@ namespace odeToFood.Models
 {
     public class OdetoFoodDb : DbContext
     {
-        public OdetoFoodDb() : base("name=DefaultConnection")
+        public OdetoFoodDb() : base("name=mydb")
         {
 
         }

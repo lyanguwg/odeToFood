@@ -41,7 +41,7 @@ namespace odeToFood.Controllers
                             .Where( r => searchTerm == null || r.Name.StartsWith(searchTerm))
                             .Select(r => new RestaurantListViewModel
                             {
-                                Id = r.id,
+                                Id = r.Id,
                                 Name = r.Name,
                                 City = r.City,
                                 Country = r.Country,

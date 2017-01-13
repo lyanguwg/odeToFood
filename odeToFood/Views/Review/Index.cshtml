@@ -1,0 +1,13 @@
+﻿@model odeToFood.Models.Restaurant
+
+@{
+    ViewBag.Title = "Reviews for Restaurant";
+}
+
+<h2>Reviews for Restaurant @Model.Name</h2> 
+
+@Html.Partial("_Reviews", Model.Reviews )
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>

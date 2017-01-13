@@ -38,6 +38,9 @@ namespace odeToFood.Migrations
                     Country = "US",
                     Reviews = new List<Models.Review> {
                         new Models.Review { Rating = 10, Body = "great one" ,ReviewerName = "Scott"}
+
+
+
                     }
                 });
 
