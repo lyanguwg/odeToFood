@@ -1,6 +1,7 @@
 ﻿using odeToFood.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -47,25 +48,34 @@ namespace odeToFood.Controllers
         }
 
         // GET: Review/Create
-        public ActionResult Create()
+        public ActionResult Create(int restaurantid)
         {
+            
             return View();
         }
 
         // POST: Review/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Review review)
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Reviews.Add(review);
+                    db.SaveChanges();
+                    return RedirectToAction("Index", new { restaurantid = review.RestaurantId });
+                }
+         
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+              
             }
+            return View(review);
+
         }
 
         // GET: Review/Edit/5
@@ -79,14 +89,19 @@ namespace odeToFood.Controllers
 
         // POST: Review/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+    //    public ActionResult Edit(int id, FormCollection collection)
+    public ActionResult Edit (Review review)
         {
             // var review = _reviews.Single(r => r.Id == id);
 
-            var review = db.Reviews.Single(r => r.Id == id);
-            if (TryUpdateModel(review))
+            // var review = db.Reviews.Single(r => r.Id == id);
+          
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("Index");
+                db.Entry(review).State = EntityState.Modified;
+                 db.SaveChanges();
+               
+                return RedirectToAction("Index", new { restaurantid = review.RestaurantId });
             }
             else
             {
